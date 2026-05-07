@@ -1,0 +1,50 @@
+---
+---
+
+<div class="fixed top-6 right-6 z-50 flex gap-4">
+  <button 
+    id="btn-en" 
+    class="w-10 h-10 flex items-center justify-center bg-zinc-900 border-2 border-zinc-700 hover:border-cyan-500 transition-all duration-300 rounded-sm shadow-lg grayscale hover:grayscale-0 focus:border-cyan-500"
+    title="English"
+  >
+    <img src="https://flagcdn.com/us.svg" alt="USA Flag" class="w-6 h-auto" />
+  </button>
+  <button 
+    id="btn-es" 
+    class="w-10 h-10 flex items-center justify-center bg-zinc-900 border-2 border-zinc-700 hover:border-magenta-500 transition-all duration-300 rounded-sm shadow-lg grayscale hover:grayscale-0 focus:border-magenta-500"
+    title="Español"
+  >
+    <img src="https://flagcdn.com/co.svg" alt="Colombia Flag" class="w-6 h-auto" />
+  </button>
+</div>
+
+<script>
+  const btnEn = document.getElementById('btn-en');
+  const btnEs = document.getElementById('btn-es');
+  const html = document.documentElement;
+
+  const setLanguage = (lang: string) => {
+    html.setAttribute('lang', lang);
+    localStorage.setItem('preferred-lang', lang);
+    
+    // Update active state
+    if (lang === 'en') {
+      btnEn?.classList.remove('grayscale');
+      btnEn?.classList.add('border-cyan-500');
+      btnEs?.classList.add('grayscale');
+      btnEs?.classList.remove('border-magenta-500');
+    } else {
+      btnEs?.classList.remove('grayscale');
+      btnEs?.classList.add('border-magenta-500');
+      btnEn?.classList.add('grayscale');
+      btnEn?.classList.remove('border-cyan-500');
+    }
+  };
+
+  // Init from localStorage or browser default
+  const savedLang = localStorage.getItem('preferred-lang') || (navigator.language.startsWith('es') ? 'es' : 'en');
+  setLanguage(savedLang);
+
+  btnEn?.addEventListener('click', () => setLanguage('en'));
+  btnEs?.addEventListener('click', () => setLanguage('es'));
+</script>
