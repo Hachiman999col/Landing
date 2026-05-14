@@ -6,7 +6,8 @@ const techs = [
     descEs: "Framework de nivel empresarial para aplicaciones web escalables.",
     color: "magenta",
     glow: "text-glow-magenta",
-    border: "border-glow-magenta"
+    border: "border-glow-magenta",
+    subtext:"V9 , V16, v21"
   },
   {
     name: "REACT",
@@ -14,7 +15,7 @@ const techs = [
     descEs: "Biblioteca basada en componentes para interfaces de usuario interactivas.",
     color: "cyan",
     glow: "text-glow-cyan",
-    border: "border-glow-cyan"
+    border: "border-glow-cyan",  subtext:"tanstack, redux, zustand"
   },
   {
     name: "REACT NATIVE",
@@ -22,45 +23,49 @@ const techs = [
     descEs: "Desarrollo móvil multiplataforma con rendimiento nativo.",
     color: "green",
     glow: "text-glow-green",
-    border: "border-glow-green"
+    border: "border-glow-green",  subtext:"expo, CLI (android)"
   }
 ];
 ---
 
-<section class="px-6 md:px-12 py-20 bg-zinc-950/50">
-  <div class="mb-12">
-    <h2 class="text-2xl md:text-3xl font-bold tracking-widest text-white uppercase flex items-center gap-4">
-      <span class="text-cyan-500">[</span> 
-      <span class="lang-en">MODULES_LOADED</span>
-      <span class="lang-es">MODULOS_CARGADOS</span>
-      <span class="text-cyan-500">]</span>
-      <div class="h-[2px] flex-1 bg-gradient-to-right from-cyan-500/50 to-transparent"></div>
+<section id="tech-stack" class="px-8 md:px-16 py-24 bg-zinc-950/20">
+  <div class="mb-16">
+    <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] text-white uppercase flex items-center gap-6">
+      <span class="text-cyan-400">01 //</span> 
+      <span class="lang-en">Core_Modules</span>
+      <span class="lang-es">Modulos_Base</span>
+      <div class="h-[1px] flex-1 bg-zinc-900"></div>
     </h2>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {techs.map((tech) => (
-      <div class={`group relative p-8 border-2 border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800/50 transition-all duration-300 ${tech.border}`}>
-        <div class="absolute top-0 right-0 p-2 text-[10px] text-zinc-600 font-bold group-hover:text-zinc-400">
-          v2.0.{Math.floor(Math.random() * 10)}
+      <div class={`group relative p-8 border border-zinc-800/50 bg-zinc-900/20 hover:border-cyan-400/30 transition-all duration-300 rounded-sm overflow-hidden`}>
+        <div class="absolute top-0 right-0 p-3 text-[9px] text-zinc-700 font-bold tracking-tighter group-hover:text-cyan-400/50">
+          LOAD_v2.0.{Math.floor(Math.random() * 10)}
         </div>
         
-        <h3 class={`text-xl font-bold mb-4 tracking-tighter ${tech.glow}`}>
-          {tech.name}
-        </h3>
-        
-        <div class="text-zinc-400 text-sm leading-relaxed mb-6 h-12">
-          <p class="lang-en">{tech.descEn}</p>
-          <p class="lang-es">{tech.descEs}</p>
+        <div class="space-y-4">
+          <h3 class={`text-lg font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors`}>
+            {tech.name}
+          </h3>
+          
+          <div class="text-zinc-500 text-sm leading-relaxed h-14">
+            <p class="lang-en">{tech.descEn}</p>
+            <p class="lang-es">{tech.descEs}</p>
+          </div>
+          
+          <div class="flex items-center gap-3 pt-4">
+            <div class={`h-1.5 w-1.5 rounded-full ${tech.name === 'ANGULAR' ? "bg-pink-500 shadow-[0_0_5px_var(--neon-magenta)]" : tech.name === 'REACT' ? "bg-cyan-400 shadow-[0_0_5px_var(--neon-cyan)]" : "bg-emerald-400 shadow-[0_0_5px_var(--neon-green)]"}`}></div>
+            <span class="text-[9px] text-zinc-600 uppercase tracking-widest font-bold">
+          
+              <span >{tech.subtext}</span>
+            </span>
+          </div>
         </div>
         
-        <div class="flex items-center gap-2">
-          <div class={`h-2 w-2 rounded-full animate-pulse ${tech.name === 'ANGULAR' ? 'bg-magenta-500 shadow-[0_0_5px_#ff00ff]' : tech.name === 'REACT' ? 'bg-cyan-500 shadow-[0_0_5px_#00f3ff]' : 'bg-green-500 shadow-[0_0_5px_#39ff14]'}`}></div>
-          <span class="text-[10px] text-zinc-500 uppercase tracking-widest">
-            <span class="lang-en">Running optimization...</span>
-            <span class="lang-es">Ejecutando optimización...</span>
-          </span>
-        </div>
+        <!-- Subtle Accent Line -->
+        <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-500 opacity-30"></div>
       </div>
     ))}
   </div>

@@ -6,9 +6,10 @@
 
 @layer base {
   :root {
-    --neon-cyan: #00f3ff;
-    --neon-magenta: #ff00ff;
-    --neon-green: #39ff14;
+    --neon-cyan: theme('colors.cyan.400');
+    --neon-magenta: theme('colors.pink.500');
+    --neon-green: theme('colors.emerald.400');
+    --terminal-bg: theme('colors.zinc.950');
   }
 
   html,
@@ -20,76 +21,30 @@
   }
 }
 
-/* === ESTILOS PERSONALIZADOS FUERA DE @layer base === */
-
-.scanline {
-  width: 100%;
-  height: 100px;
-  z-index: 10;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  opacity: 0.1;
-  position: fixed;
-  bottom: 100%;
-  animation: scanline 10s linear infinite;
-  pointer-events: none;
+/* Omarchy-style Utilities */
+.omarchy-window {
+  @apply border border-cyan-400/20 bg-zinc-900/40 backdrop-blur-sm rounded-sm;
 }
 
-@keyframes scanline {
-  0% {
-    bottom: 100%;
-  }
-  100% {
-    bottom: -100px;
-  }
-}
+.text-glow-cyan { text-shadow: 0 0 10px theme('colors.cyan.400'); }
+.text-glow-magenta { text-shadow: 0 0 10px theme('colors.pink.500'); }
+.text-glow-green { text-shadow: 0 0 10px theme('colors.emerald.400'); }
 
-/* Neon Glows */
-.text-glow-cyan {
-  text-shadow:
-    0 0 10px var(--neon-cyan),
-    0 0 20px var(--neon-cyan);
-}
-.text-glow-magenta {
-  text-shadow:
-    0 0 10px var(--neon-magenta),
-    0 0 20px var(--neon-magenta);
-}
-.text-glow-green {
-  text-shadow:
-    0 0 10px var(--neon-green),
-    0 0 20px var(--neon-green);
-}
-
-.border-glow-cyan {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px var(--neon-cyan);
-}
-.border-glow-magenta {
-  border-color: var(--neon-magenta);
-  box-shadow: 0 0 15px var(--neon-magenta);
-}
-.border-glow-green {
-  border-color: var(--neon-green);
-  box-shadow: 0 0 15px var(--neon-green);
-}
-
-/* Grid Background - ESTO ES LO MÁS IMPORTANTE */
+/* Grid Background */
 .bg-grid {
-  background-size: 40px 40px;
+  background-size: 32px 32px;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-/* Language */
-[lang="es"] .lang-en {
-  display: none !important;
+/* Custom Scrollbar (Terminal Style) */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-cyan-400/20 rounded-full hover:bg-cyan-400/50;
 }
-[lang="en"] .lang-es {
-  display: none !important;
-}
+
+/* Language Visibility */
+[lang="es"] .lang-en { display: none !important; }
+[lang="en"] .lang-es { display: none !important; }

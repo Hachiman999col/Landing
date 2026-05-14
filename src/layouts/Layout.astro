@@ -1,7 +1,10 @@
 ---
+import '@fontsource/jetbrains-mono';
 
-import LanguageToggle from "../components/LanguageToggle.astro";
 import "../styles/global.css";
+
+import LanguageToggle from '../components/LanguageToggle.astro';
+import Sidebar from '../components/Sidebar.astro';
 ---
 
 <!doctype html>
@@ -17,20 +20,58 @@ import "../styles/global.css";
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-grid">
-		<div class="scanline"></div>
-		<LanguageToggle />
-		<main class="relative z-0 min-h-screen">
-			<slot />
+	<body class="bg-grid antialiased">
+		<main class="relative p-3 z-0 h-screen flex flex-col overflow-hidden">
+			<div class="w-full flex-col flex-1 flex omarchy-window p-1 overflow-hidden">
+				
+        <header class="border-b border-cyan-400/10 p-2 mb-1">
+          <div class="flex justify-between items-center px-2">
+            <div class="flex items-center gap-4">
+              <div class="flex gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500/30"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/30"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500/30"></div>
+              </div>
+              <span class="text-[10px] text-zinc-500 font-mono tracking-[0.2em] uppercase">HV_v1.1 // {Astro.generator}</span>
+            </div>
+            <LanguageToggle />
+          </div>
+        </header>
+
+				<div class="flex flex-1 overflow-hidden">
+					<Sidebar />
+					<div class="flex-1 overflow-y-auto custom-scrollbar bg-black/10">
+						<slot />
+					</div>
+				</div>
+			</div>
 		</main>
 	</body>
 </html>
 
-<style>
+<style is:global>
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
 	}
+
+	code, pre, body {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #00f3ff44;
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #00f3ff;
+  }
 </style>

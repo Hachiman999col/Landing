@@ -1,0 +1,108 @@
+---
+const projects = [
+  {
+    id: "APP_NOTES",
+    title: "appNotes",
+    descEn: "A lightweight mobile application for note-taking. Built with React Native CLI using native Android modules for optimized performance.",
+    descEs: "Una aplicación móvil ligera para toma de notas. Construida con React Native CLI utilizando módulos nativos de Android para un rendimiento optimizado.",
+    tech: ["REACT NATIVE", "TYPESCRIPT", "KOTLIN"],
+    featuresEn: ["Native Performance", "Local Persistence", "Lightweight Build"],
+    featuresEs: ["Rendimiento Nativo", "Persistencia Local", "Construcción Ligera"],
+    links: [
+      { label: "GITHUB", href: "https://github.com/Hachiman999col/appNotes" },
+      { label: "APK.FILE", href: "https://github.com/Hachiman999col/appNotes/blob/main/notas.apk" }
+    ]
+  }
+];
+---
+
+<section id="projects" class="px-8 md:px-16 py-24">
+  <div class="mb-16">
+    <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] text-white uppercase flex items-center gap-6">
+      <span class="text-pink-500">02 //</span> 
+      <span class="lang-en">Featured_Work</span>
+      <span class="lang-es">Proyectos_Destacados</span>
+      <div class="h-[1px] flex-1 bg-zinc-900"></div>
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 gap-12">
+    {projects.map((project) => (
+      <div class="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 p-1 omarchy-window hover:border-pink-500/30 transition-all duration-500">
+        <!-- Project Sidebar (Technical Specs) -->
+        <div class="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-zinc-800/50 p-6 bg-black/20">
+          <div class="space-y-6">
+            <div>
+              <div class="text-[9px] text-zinc-600 font-bold uppercase tracking-[0.2em] mb-3">Project_ID</div>
+              <div class="text-sm font-bold text-pink-500 tracking-tighter">{project.id}</div>
+            </div>
+            
+            <div>
+              <div class="text-[9px] text-zinc-600 font-bold uppercase tracking-[0.2em] mb-3">Stack_Trace</div>
+              <div class="flex flex-wrap gap-2">
+                {project.tech.map(t => (
+                  <span class="px-2 py-0.5 border border-zinc-800 text-[9px] text-zinc-400 font-bold">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-zinc-900/50">
+              <div class="text-[9px] text-zinc-600 font-bold uppercase tracking-[0.2em] mb-3">Execution_Logs</div>
+              <ul class="space-y-1">
+                {project.featuresEn.map((f, i) => (
+                  <li class="text-[10px] text-zinc-500 flex items-center gap-2">
+                    <span class="text-pink-500/50">›</span>
+                    <span class="lang-en">{f}</span>
+                    <span class="lang-es">{project.featuresEs[i]}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Main Content -->
+        <div class="lg:col-span-8 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tighter group-hover:text-glow-magenta transition-all">
+                {project.title}
+              </h3>
+              <div class="text-[9px] text-zinc-700 font-mono">v1.0.4 // STABLE</div>
+            </div>
+            
+            <div class="text-zinc-400 text-sm leading-relaxed max-w-2xl mb-8">
+              <p class="lang-en">{project.descEn}</p>
+              <p class="lang-es">{project.descEs}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4 mt-auto">
+            {project.links.map(link => (
+              <a 
+                href={link.href}
+                target="_blank"
+                class="px-4 py-2 border border-zinc-800 hover:border-pink-500/50 hover:bg-pink-500/5 text-zinc-500 hover:text-pink-500 text-[10px] font-bold tracking-widest transition-all duration-300 rounded-sm no-underline"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Background Scanline effect local to section -->
+  <div class="mt-16 text-center">
+    <div class="inline-block text-[9px] text-zinc-800 font-mono animate-pulse">
+      -- END OF DIRECTORY --
+    </div>
+  </div>
+</section>
+
+<style>
+  .text-glow-magenta {
+    text-shadow: 0 0 10px var(--neon-magenta);
+  }
+</style>

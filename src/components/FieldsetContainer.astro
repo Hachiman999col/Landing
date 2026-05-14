@@ -1,0 +1,23 @@
+---
+// src/components/TerminalBox.astro
+interface Props {
+  title: string;
+
+}
+const { title } = Astro.props;
+---
+
+
+<div class=" w-full">
+  <fieldset class="border border-slate-500 rounded-sm p-2 font-mono text-slate-300">
+    
+    <!-- El título que corta el borde -->
+    <legend class="px-2 text-sm font-bold flex items-center gap-2">
+      <span class="text-white">{title}</span>
+      <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+    </legend>
+
+	<slot />
+  </fieldset>
+
+</div>

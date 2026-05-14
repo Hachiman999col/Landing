@@ -1,0 +1,65 @@
+---
+const navItems = [
+  { href: "#hero", labelEn: "INITIALIZE", labelEs: "INICIALIZAR" },
+  { href: "#tech-stack", labelEn: "MODULES", labelEs: "MODULOS" },
+  { href: "#projects", labelEn: "PROJECTS", labelEs: "PROYECTOS" },
+
+];
+
+const socials = [
+  { name: "GITHUB", href: "https://github.com/Hachiman999col", icon: "gh" },
+  { name: "LINKEDIN", href: "https://www.linkedin.com/in/diego-fernando-bolaños-palma-6a536720b", icon: "in" },
+];
+---
+
+<aside class="w-64 flex-col hidden md:flex border-r border-cyan-400/10 bg-zinc-950/20 p-6 h-full">
+  <div class="mb-10">
+    <div class="text-[10px] text-cyan-400/50 font-bold tracking-[0.3em] mb-4 flex items-center gap-3">
+      <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_var(--neon-cyan)]"></div>
+      <span>NAV_SYSTEM</span>
+    </div>
+    <div class="h-[1px] w-full bg-gradient-to-r from-cyan-400/20 via-cyan-400/5 to-transparent"></div>
+  </div>
+
+  <nav class="flex-1 space-y-1">
+    {navItems.map((item) => (
+      <a 
+        href={item.href}
+        class="group flex items-center gap-3 py-2 px-3 -mx-3 rounded-sm text-xs font-medium tracking-wide text-zinc-500 hover:text-cyan-400 hover:bg-cyan-400/5 transition-all duration-200 no-underline"
+      >
+        <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400 font-bold">»</span>
+        <span class="lang-en">{item.labelEn}</span>
+        <span class="lang-es">{item.labelEs}</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="mt-auto pt-8 border-t border-zinc-900/50">
+    <div class="flex flex-col gap-3">
+      {socials.map((social) => (
+        <a 
+          href={social.href} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-[10px] text-zinc-600 hover:text-pink-500 transition-colors duration-200 flex items-center gap-2 uppercase tracking-[0.2em]"
+        >
+          <span class="text-zinc-800 font-bold">//</span> {social.name}
+        </a>
+      ))}
+    </div>
+    
+    <div class="mt-8 p-3 rounded-sm bg-black/40 border border-zinc-900/50 font-mono">
+      <div class="text-[9px] text-zinc-600 space-y-1.5">
+        <div class="flex justify-between"><span>CPU</span> <span class="text-zinc-400 font-bold">R7_5700G</span></div>
+        <div class="flex justify-between"><span>MEM</span> <span class="text-zinc-400 font-bold">32GB_RAM</span></div>
+        <div class="flex justify-between"><span>OS</span> <span class="text-zinc-400 font-bold uppercase">Omarchy</span></div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .text-glow-cyan {
+    text-shadow: 0 0 8px var(--neon-cyan);
+  }
+</style>
