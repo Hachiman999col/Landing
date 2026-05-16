@@ -6,10 +6,10 @@
 
 @layer base {
   :root {
-    --neon-cyan: theme('colors.cyan.400');
-    --neon-magenta: theme('colors.pink.500');
-    --neon-green: theme('colors.emerald.400');
-    --terminal-bg: theme('colors.zinc.950');
+    --neon-cyan: var(--color-cyan-400);
+    --neon-magenta: var(--color-pink-500);
+    --neon-green: var(--color-emerald-400);
+    --terminal-bg: var(--color-zinc-950);
   }
 
   html,
@@ -26,9 +26,9 @@
   @apply border border-cyan-400/20 bg-zinc-900/40 backdrop-blur-sm rounded-sm;
 }
 
-.text-glow-cyan { text-shadow: 0 0 10px theme('colors.cyan.400'); }
-.text-glow-magenta { text-shadow: 0 0 10px theme('colors.pink.500'); }
-.text-glow-green { text-shadow: 0 0 10px theme('colors.emerald.400'); }
+.text-glow-cyan { text-shadow: 0 0 10px var(--color-cyan-400); }
+.text-glow-magenta { text-shadow: 0 0 10px var(--color-pink-500); }
+.text-glow-green { text-shadow: 0 0 10px var(--color-emerald-400); }
 
 /* Grid Background */
 .bg-grid {
