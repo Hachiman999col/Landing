@@ -1,6 +1,12 @@
 ---
+import TechModal from './TechModal.astro';
+import angularLogo from '../assets/logos/angular.png';
+import reactLogo from '../assets/logos/react.png';
+import expoLogo from '../assets/logos/expo.png';
+
 const techs = [
   {
+    id: "ANGULAR",
     name: "ANGULAR",
     descEn: "Enterprise-grade framework for scalable web applications.",
     descEs: "Framework de nivel empresarial para aplicaciones web escalables.",
@@ -10,6 +16,7 @@ const techs = [
     subtext:"V9 , V16, v21"
   },
   {
+    id: "REACT",
     name: "REACT",
     descEn: "Component-based library for interactive user interfaces.",
     descEs: "Biblioteca basada en componentes para interfaces de usuario interactivas.",
@@ -18,12 +25,84 @@ const techs = [
     border: "border-glow-cyan",  subtext:"tanstack, redux, zustand"
   },
   {
+    id: "REACT NATIVE",
     name: "REACT NATIVE",
     descEn: "Cross-platform mobile development with native performance.",
     descEs: "Desarrollo móvil multiplataforma con rendimiento nativo.",
     color: "green",
     glow: "text-glow-green",
     border: "border-glow-green",  subtext:"expo, CLI (android)"
+  }
+];
+
+const techDetails = [
+  {
+    id: "ANGULAR",
+    name: "ANGULAR",
+    internalTools: ["Tailwind", "Bootstrap", "Mapbox", "RxJS", "NGRX"],
+    logoUrl: angularLogo.src,
+    professionalProjects: [
+      {
+        nameEn: "My Market",
+        nameEs: "Mi mercado",
+        descEn: "Worked as a Frontend Engineer on 'Mi Mercado', a web platform for managing products and suppliers for price control and supply in various government entities. The project was started from scratch and divided into 4 parts: a library containing general styles and components, and three entities called administrator, suppliers, and clients, all using Angular.",
+        descEs: "Trabajé como ingeniero Frontend en Mi mercado. Mi mercado es una web de gestión productos y proveedores para el control de precios y abastecimiento de las diferentes entidades gubernamentales, este proyecto fue iniciado desde cero pero dividido en 4 partes que fueron, una librería con contenida los estilos y componentes generales y otras tres entidades llamadas administrador, proveedores y clientes todo esto haciendo uso de Angular.",
+        technologies: ["Angular 16", "Tailwind", "Git"]
+      }
+    ],
+    personalProjects: [
+      {
+        nameEn: "Angular Portfolio v1",
+        nameEs: "Portafolio Angular v1",
+        descEn: "First version of my professional portfolio developed to demonstrate advanced skills in Angular and CSS animations.",
+        descEs: "Primera versión de mi portafolio profesional desarrollado para demostrar habilidades avanzadas en Angular y animaciones CSS.",
+        technologies: ["Angular", "SCSS", "Framer Motion"],
+        githubUrl: "https://github.com/Hachiman999col"
+      }
+    ]
+  },
+  {
+    id: "REACT",
+    name: "REACT",
+    internalTools: ["Zustand", "Redux", "Tanstack Query", "Tailwind", "Framer Motion"],
+    logoUrl: reactLogo.src,
+    professionalProjects: [
+      {
+        nameEn: "ANDI",
+        nameEs: "ANDI",
+        descEn: "I worked as a Frontend Engineer at Andi. Andi is a platform for managing environmental and industrial waste collection and recycling campaigns.",
+        descEs: "Trabajé como ingeniero Frontend en Andi. Andi es una plataforma para gestionar campañas de recolección y reciclaje de residuos ambientales e industriales.",
+        technologies: ["MUI", "Tailwind", "Redux", "Vite"]
+      }
+    ],
+    personalProjects: [
+  
+    ]
+  },
+  {
+    id: "REACT NATIVE",
+    name: "REACT NATIVE",
+    internalTools: ["Expo", "Native Modules", "React Navigation", "Reanimated"],
+    logoUrl: expoLogo.src,
+    professionalProjects: [
+          {
+        nameEn: "Cedula animal",
+        nameEs: "Animal ID",
+        descEs: "Trabajó como desarrollador Frontend(Next js) y móvil(React native / expo) en Cedula animal. Una plataforma de gestión y control de recordatorios de mascotas, ya sea a nivel app o web, así como servicios de ayuda para la búsqueda y recuperación de mascotas. El mayor desafío al que me enfrenté en este proyecto fue trabajar en un nuevo entorno como desarrollador de React Native.",
+        descEn: "I worked as a frontend (Next.js) and mobile (React Native/Expo) developer at Cedula Animal, a platform for managing and tracking pet reminders, both as an app and a website, as well as providing services to help find and recover lost pets. The biggest challenge I faced on this project was working in a new environment as a React Native developer.",
+        technologies: ["expo", "react-redux", "react-native-maps", "react-native-webview", "react-native-paper"]
+      }
+    ],
+    personalProjects: [
+      {
+        nameEn: "appNotes",
+        nameEs: "appNotes",
+        descEn: "A lightweight mobile application for note-taking. Built with React Native CLI using native Android modules for optimized performance.",
+        descEs: "Una aplicación móvil ligera para toma de notas. Construida con React Native CLI utilizando módulos nativos de Android para un rendimiento optimizado.",
+        technologies: ["React Native", "Kotlin", "SQLite"],
+        githubUrl: "https://github.com/Hachiman999col/appNotes"
+      }
+    ]
   }
 ];
 ---
@@ -40,7 +119,10 @@ const techs = [
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {techs.map((tech) => (
-      <div class={`group relative p-8 border border-zinc-800/50 bg-zinc-900/20 hover:border-cyan-400/30 transition-all duration-300 rounded-sm overflow-hidden`}>
+      <button 
+        data-tech-id={tech.id}
+        class="open-tech-modal-btn text-left group relative p-8 border border-zinc-800/50 bg-zinc-900/20 hover:border-cyan-400/30 transition-all duration-300 rounded-sm overflow-hidden"
+      >
         <div class="absolute top-0 right-0 p-3 text-[9px] text-zinc-700 font-bold tracking-tighter group-hover:text-cyan-400/50">
           LOAD_v2.0.{Math.floor(Math.random() * 10)}
         </div>
@@ -56,7 +138,7 @@ const techs = [
           </div>
           
           <div class="flex items-center gap-3 pt-4">
-            <div class={`h-1.5 w-1.5 rounded-full ${tech.name === 'ANGULAR' ? "bg-pink-500 shadow-[0_0_5px_var(--neon-magenta)]" : tech.name === 'REACT' ? "bg-cyan-400 shadow-[0_0_5px_var(--neon-cyan)]" : "bg-emerald-400 shadow-[0_0_5px_var(--neon-green)]"}`}></div>
+            <div class={`h-1.5 w-1.5 rounded-full ${tech.id === 'ANGULAR' ? "bg-pink-500 shadow-[0_0_5px_var(--neon-magenta)]" : tech.id === 'REACT' ? "bg-cyan-400 shadow-[0_0_5px_var(--neon-cyan)]" : "bg-emerald-400 shadow-[0_0_5px_var(--neon-green)]"}`}></div>
             <span class="text-[9px] text-zinc-600 uppercase tracking-widest font-bold">
           
               <span >{tech.subtext}</span>
@@ -66,7 +148,9 @@ const techs = [
         
         <!-- Subtle Accent Line -->
         <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-500 opacity-30"></div>
-      </div>
+      </button>
     ))}
   </div>
+
+  <TechModal techDetails={techDetails} />
 </section>
