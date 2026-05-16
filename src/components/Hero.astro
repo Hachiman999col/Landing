@@ -32,7 +32,7 @@ import { Image } from "astro:assets";
     </div>
 
     <div class="flex flex-wrap gap-4 pt-4">
-      <button class="h-10 px-8 border border-pink-500/50 bg-pink-500/5 text-pink-500 text-xs font-bold tracking-widest hover:bg-pink-500 hover:text-white transition-all duration-300 rounded-sm">
+      <button id="contact-btn" class="h-10 px-8 border border-pink-500/50 bg-pink-500/5 text-pink-500 text-xs font-bold tracking-widest hover:bg-pink-500 hover:text-white transition-all duration-300 rounded-sm">
         <span class="lang-en">CONTACT.SH</span>
         <span class="lang-es">CONTACTO.SH</span>
       </button>
@@ -77,3 +77,65 @@ import { Image } from "astro:assets";
     </div>
   </div>
 </section>
+
+<!-- Contact Modal -->
+<div id="contact-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div class="w-full max-w-md bg-zinc-950 border border-zinc-800 shadow-2xl relative animate-in fade-in zoom-in duration-300">
+    <!-- Window Header -->
+    <div class="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/50">
+      <div class="flex gap-1.5">
+        <div class="w-2 h-2 rounded-full bg-zinc-700"></div>
+        <div class="w-2 h-2 rounded-full bg-zinc-700"></div>
+        <div class="w-2 h-2 rounded-full bg-zinc-700"></div>
+      </div>
+      <span class="text-[10px] text-zinc-500 font-mono tracking-widest uppercase">Contact_Info.vcf</span>
+      <button id="close-modal" class="text-zinc-500 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    
+    <!-- Content -->
+    <div class="p-8 space-y-6">
+      <div class="space-y-2">
+        <label class="text-[10px] text-cyan-400/50 font-bold tracking-[0.2em] uppercase">Email</label>
+        <p class="text-white font-mono text-sm break-all select-all cursor-pointer hover:text-cyan-400 transition-colors">diego.bolanos.p@gmail.com</p>
+      </div>
+      
+      <div class="space-y-2">
+        <label class="text-[10px] text-pink-500/50 font-bold tracking-[0.2em] uppercase">Phone</label>
+        <p class="text-white font-mono text-sm select-all cursor-pointer hover:text-pink-500 transition-colors">+57 322 2541913</p>
+      </div>
+
+      <div class="pt-4 flex justify-end">
+        <button id="close-modal-btn" class="px-6 py-2 border border-zinc-800 text-zinc-400 text-[10px] font-bold tracking-widest hover:bg-zinc-800 hover:text-white transition-all uppercase">
+          <span class="lang-en">Close</span>
+          <span class="lang-es">Cerrar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const contactBtn = document.getElementById('contact-btn');
+  const modal = document.getElementById('contact-modal');
+  const closeBtns = [document.getElementById('close-modal'), document.getElementById('close-modal-btn')];
+
+  contactBtn?.addEventListener('click', () => {
+    modal?.classList.remove('hidden');
+    modal?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  });
+
+  const closeModal = () => {
+    modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+  };
+
+  closeBtns.forEach(btn => btn?.addEventListener('click', closeModal));
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+</script>
