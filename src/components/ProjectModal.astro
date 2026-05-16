@@ -67,7 +67,7 @@ const { projects } = Astro.props;
             
             <!-- Right: Preview GIF -->
             <div class="pm-preview-section border border-zinc-900 bg-black/40 rounded-sm overflow-hidden flex items-center justify-center">
-               <img class="pm-preview-gif w-full object-contain" src="" alt="Project Preview" />
+               <img class="pm-preview-gif w-full object-contain h-[532px]" src="" alt="Project Preview" />
             </div>
          </div>
       </div>
@@ -113,12 +113,7 @@ const { projects } = Astro.props;
           // Handle Preview GIF
           if (previewGif) {
             previewGif.src = project.details.gifUrl || '';
-            previewGif.onload = () => {
-              const leftCol = modal.querySelector('.space-y-10');
-              if (leftCol) {
-                previewGif.style.maxHeight = 532 + 'px';
-              }
-            };
+         
           }
 
           // Handle animations based on type
