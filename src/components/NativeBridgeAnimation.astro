@@ -1,0 +1,88 @@
+---
+---
+<div class="w-full h-full flex items-center justify-center">
+  <div class="w-full max-w-[320px] aspect-square relative">
+    <!-- JS Side -->
+    <div class="node js-node top-[25%] left-[5%] z-10">
+      <span class="opacity-50 text-[8px] absolute -top-4 left-0 uppercase">Logical_Layer</span>
+      JS
+    </div>
+    <!-- Kotlin Side (Centered) -->
+    <div class="node kotlin-node top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-pink-500/20 shadow-lg">
+      <span class="opacity-50 text-[8px] absolute -bottom-6 left-1/2 -translate-x-1/2 uppercase whitespace-nowrap">Core_Bridge</span>
+      KOTLIN
+    </div>
+    <!-- SQLite -->
+    <div class="node sqlite-node top-[25%] right-[5%] z-10">
+      <span class="opacity-50 text-[8px] absolute -top-4 right-0 uppercase">Persistence</span>
+      SQLITE
+    </div>
+    
+    <!-- Paths and Animations -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 100 100">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Logical Paths -->
+      <path id="p1-go" d="M 15 35 L 50 65" class="path stroke-cyan-500/10" />
+      <path id="p1-back" d="M 50 65 L 15 35" class="path stroke-pink-500/10" />
+      
+      <path id="p2-go" d="M 50 65 L 85 35" class="path stroke-pink-500/10" />
+      <path id="p2-back" d="M 85 35 L 50 65" class="path stroke-amber-500/10" />
+
+      <!-- JS -> KOTLIN (Request) -->
+      <circle r="1.5" fill="#22d3ee" filter="url(#glow)">
+        <animateMotion dur="1.5s" repeatCount="indefinite">
+          <mpath href="#p1-go"/>
+        </animateMotion>
+      </circle>
+
+      <!-- KOTLIN -> JS (Response) -->
+      <circle r="1.5" fill="#ec4899" filter="url(#glow)">
+        <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.75s">
+          <mpath href="#p1-back"/>
+        </animateMotion>
+      </circle>
+
+      <!-- KOTLIN -> SQLITE (Query) -->
+      <circle r="1.5" fill="#ec4899" filter="url(#glow)">
+        <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.3s">
+          <mpath href="#p2-go"/>
+        </animateMotion>
+      </circle>
+
+      <!-- SQLITE -> KOTLIN (Data) -->
+      <circle r="1.5" fill="#f59e0b" filter="url(#glow)">
+        <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.9s">
+          <mpath href="#p2-back"/>
+        </animateMotion>
+      </circle>
+    </svg>
+  </div>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .node {
+    @apply absolute w-16 h-16 border border-zinc-800 bg-zinc-950 flex items-center justify-center text-[10px] font-bold text-zinc-500 tracking-tighter rounded-sm;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .js-node { @apply border-cyan-500/30 text-cyan-500/70; }
+  .kotlin-node { @apply border-pink-500/30 text-pink-500/70; }
+  .sqlite-node { @apply border-amber-500/30 text-amber-500/70; }
+
+  .path {
+    fill: none;
+    stroke-width: 1;
+    stroke-dasharray: 4;
+  }
+</style>

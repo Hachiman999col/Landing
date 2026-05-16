@@ -1,0 +1,165 @@
+---
+import NativeBridgeAnimation from './NativeBridgeAnimation.astro';
+
+interface Props {
+  projects: any[];
+}
+
+const { projects } = Astro.props;
+---
+
+<dialog id="project-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm p-4 w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center">
+  <div class="omarchy-window bg-zinc-950/95 border-pink-500/30 overflow-hidden flex flex-col w-full max-w-4xl max-h-[90vh] shadow-2xl shadow-pink-500/10 relative">
+     <!-- Modal Header -->
+     <div class="flex justify-between items-center p-4 border-b border-zinc-900 bg-black/40">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+          <h3 class="pm-title text-lg font-bold text-white tracking-[0.2em] uppercase font-mono"></h3>
+        </div>
+        <button type="button" class="pm-close-btn p-2 text-zinc-500 hover:text-pink-500 transition-colors hover:bg-pink-500/5 rounded-sm group/close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none group-hover/close:rotate-90 transition-transform duration-300"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+     </div>
+     
+      <!-- Modal Body -->
+      <div class="p-8 overflow-y-auto custom-scrollbar">
+         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Left: Info + Animations -->
+            <div class="space-y-10 information-section">
+               <section>
+                  <h4 class="text-[10px] text-zinc-500 font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
+                     <span class="w-8 h-[1px] bg-zinc-800"></span>
+                     01 // Runtime_Languages
+                  </h4>
+                   <div class="pm-languages flex flex-wrap gap-3"></div>
+                </section>
+                
+                <section>
+                   <h4 class="text-[10px] text-zinc-500 font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
+                      <span class="w-8 h-[1px] bg-zinc-800"></span>
+                      02 // Internal_Engine
+                   </h4>
+                   <div class="pm-technologies flex flex-wrap gap-3"></div>
+                </section>
+
+                <!-- Animation Container -->
+                <section>
+                   <h4 class="text-[10px] text-zinc-500 font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
+                      <span class="w-8 h-[1px] bg-zinc-800"></span>
+                      03 // Visual_Data_Flow
+                   </h4>
+                   <div class="border border-zinc-900 bg-black/40 rounded-sm p-6 relative min-h-[300px] flex flex-col items-center justify-center overflow-hidden">
+                      <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none bg-grid"></div>
+                      
+                       <div class="pm-animation-content w-full h-full">
+                          <div class="pm-anim-nativeCLI hidden h-full">
+                             <NativeBridgeAnimation />
+                          </div>
+                       </div>
+                      
+                      <div class="absolute bottom-4 right-4 text-right">
+                        <div class="text-[8px] text-zinc-700 font-mono">ENCRYPTED_CHANNEL: ACTIVE</div>
+                        <div class="text-[8px] text-zinc-800 font-mono">LATENCY: 0.04ms</div>
+                      </div>
+                   </div>
+                </section>
+            </div>
+            
+            <!-- Right: Preview GIF -->
+            <div class="pm-preview-section border border-zinc-900 bg-black/40 rounded-sm overflow-hidden flex items-center justify-center">
+               <img class="pm-preview-gif w-full object-contain" src="" alt="Project Preview" />
+            </div>
+         </div>
+      </div>
+  </div>
+</dialog>
+
+<script is:inline define:vars={{ projects }}>
+  function setupModal() {
+    const modal = document.getElementById('project-modal');
+    const closeBtn = modal.querySelector('.pm-close-btn');
+    const openBtns = document.querySelectorAll('.open-modal-btn');
+    
+    if (!modal || !closeBtn) return;
+
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const projectId = btn.getAttribute('data-project-id');
+        const project = projects.find(p => p.id === projectId);
+        
+        if (project) {
+          const titleEl = modal.querySelector('.pm-title');
+          const langEl = modal.querySelector('.pm-languages');
+          const techEl = modal.querySelector('.pm-technologies');
+          const animNative = modal.querySelector('.pm-anim-nativeCLI');
+          const previewSection = modal.querySelector('.pm-preview-section');
+          const previewGif = modal.querySelector('.pm-preview-gif');
+
+          if (titleEl) titleEl.textContent = project.title;
+          
+          if (langEl) {
+            langEl.innerHTML = project.details.languages.map(lang => 
+              `<span class="px-3 py-1 border border-pink-500/20 text-[10px] text-pink-500/80 font-bold bg-pink-500/5">${lang}</span>`
+            ).join('');
+          }
+          
+          if (techEl) {
+            techEl.innerHTML = project.details.internal.map(tech => 
+              `<span class="px-3 py-1 border border-zinc-800 text-[10px] text-zinc-400 font-bold bg-zinc-900/50">${tech}</span>`
+            ).join('');
+          }
+
+          // Handle Preview GIF
+          if (previewGif) {
+            previewGif.src = project.details.gifUrl || '';
+            previewGif.onload = () => {
+              const leftCol = modal.querySelector('.space-y-10');
+              if (leftCol) {
+                previewGif.style.maxHeight = 532 + 'px';
+              }
+            };
+          }
+
+          // Handle animations based on type
+          if (animNative) {
+            if (project.details.animationType === 'nativeCLI') {
+              animNative.classList.remove('hidden');
+            } else {
+              animNative.classList.add('hidden');
+            }
+          }
+          
+          modal.showModal();
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      modal.close();
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.close();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupModal);
+  } else {
+    setupModal();
+  }
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+</style>
