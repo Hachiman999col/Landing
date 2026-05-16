@@ -40,7 +40,7 @@ const { techDetails } = Astro.props;
       <!-- Modal Body -->
       <div class="flex-1 overflow-hidden">
          <div class="grid grid-cols-1 lg:grid-cols-12 h-full">
-            <!-- Left: Info + Logo (Non-scrolling or independent) -->
+            <!-- Left: Info + Logo -->
             <div class="lg:col-span-5 p-8 space-y-10 border-r border-zinc-900/50 overflow-y-auto custom-scrollbar">
                <section>
                   <h4 class="text-[10px] text-zinc-500 font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
@@ -57,18 +57,31 @@ const { techDetails } = Astro.props;
                       <span class="lang-en">02 // Core_Architecture</span>
                       <span class="lang-es">02 // Arquitectura_Base</span>
                    </h4>
-                   <div class="border border-zinc-900 bg-black/40 rounded-sm p-8 flex flex-col items-center justify-center min-h-[350px] relative overflow-hidden">
+                   <div class="border border-zinc-900 bg-black/40 rounded-sm p-8 flex flex-col items-center justify-center min-h-[350px] relative overflow-hidden group">
                       <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none bg-grid"></div>
-                      <img class="tm-logo w-48 h-48 object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]" src="" alt="Tech Logo" />
+                      
+                      <!-- Glitch Logo Container -->
+                      <div class="tm-glitch-wrapper relative w-48 h-48 flex items-center justify-center">
+                        <!-- Main Logo -->
+                        <img class="tm-logo tm-main w-full h-full object-contain relative z-10 filter drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]" src="" alt="Tech Logo" />
+                        
+                        <!-- Glitch Layers (Placed OVER the main logo) -->
+                        <img class="tm-logo tm-glitch tm-glitch-1 absolute top-0 left-0 w-full h-full object-contain z-20 opacity-0 mix-blend-screen pointer-events-none" src="" alt="" />
+                        <img class="tm-logo tm-glitch tm-glitch-2 absolute top-0 left-0 w-full h-full object-contain z-20 opacity-0 mix-blend-screen pointer-events-none" src="" alt="" />
+                        
+                        <!-- Scanline Glitch Overlay -->
+                        <div class="tm-scanline absolute inset-0 z-30 opacity-0 pointer-events-none bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-4 w-full group-hover:animate-scanline"></div>
+                      </div>
                       
                       <div class="absolute bottom-2 right-2 text-right">
                         <div class="text-[7px] text-zinc-800 font-mono">RENDER_MODE: STATIC_ASSET</div>
+                        <div class="text-[7px] text-zinc-900 font-mono">GLITCH_ENGINE: v2.0_ENABLED</div>
                       </div>
                    </div>
                 </section>
             </div>
             
-            <!-- Right: Projects (Independently Scrolling) -->
+            <!-- Right: Projects -->
             <div class="lg:col-span-7 p-8 overflow-y-auto custom-scrollbar bg-black/10">
                <div class="space-y-12">
                   <!-- Professional Projects -->
@@ -161,7 +174,7 @@ const { techDetails } = Astro.props;
         if (tech) {
           const titleEl = modal.querySelector('.tm-title');
           const internalEl = modal.querySelector('.tm-internal-tools');
-          const logoEl = modal.querySelector('.tm-logo');
+          const logos = modal.querySelectorAll('.tm-logo');
           const profListEl = modal.querySelector('.tm-prof-projects-list');
           const persListEl = modal.querySelector('.tm-pers-projects-list');
 
@@ -173,10 +186,10 @@ const { techDetails } = Astro.props;
             ).join('');
           }
           
-          if (logoEl) {
-            logoEl.src = tech.logoUrl;
-            logoEl.alt = `${tech.name} Logo`;
-          }
+          logos.forEach(logo => {
+            logo.src = tech.logoUrl;
+            logo.alt = `${tech.name} Logo`;
+          });
 
           if (profListEl) {
             profListEl.innerHTML = renderProjectList(tech.professionalProjects, false);
@@ -238,5 +251,72 @@ const { techDetails } = Astro.props;
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(6, 182, 212, 0.4);
+  }
+
+  /* --- Enhanced Glitch Animations --- */
+  
+  /* Constant very subtle jitter on main logo */
+  .tm-main {
+    animation: main-jitter 3s infinite;
+  }
+
+  @keyframes main-jitter {
+    0%, 95%, 100% { transform: translate(0,0) scale(1); filter: drop-shadow(0 0 15px rgba(6,182,212,0.4)); }
+    96% { transform: translate(1px, 1px) scale(1.01); filter: drop-shadow(-2px 0 red); }
+    98% { transform: translate(-1px, -1px) scale(0.99); filter: drop-shadow(2px 0 blue); }
+  }
+
+  /* Glitch layers visible on hover */
+  .group:hover .tm-glitch-1 {
+    animation: glitch-anim-1 0.25s infinite linear;
+    opacity: 0.8;
+    filter: hue-rotate(90deg) saturate(3) drop-shadow(2px 0 #ff00ff);
+  }
+
+  .group:hover .tm-glitch-2 {
+    animation: glitch-anim-2 0.25s infinite linear;
+    opacity: 0.8;
+    filter: hue-rotate(-90deg) saturate(3) drop-shadow(-2px 0 #00ffff);
+  }
+
+  .group:hover .tm-scanline {
+    opacity: 1;
+  }
+
+  @keyframes glitch-anim-1 {
+    0% { clip-path: inset(80% 0 0 0); transform: translate(-10px, -5px); }
+    10% { clip-path: inset(10% 0 80% 0); transform: translate(10px, 5px); }
+    20% { clip-path: inset(40% 0 40% 0); transform: translate(-10px, 5px); }
+    30% { clip-path: inset(50% 0 30% 0); transform: translate(0px, -10px); }
+    40% { clip-path: inset(20% 0 70% 0); transform: translate(10px, -5px); }
+    50% { clip-path: inset(70% 0 10% 0); transform: translate(-5px, 10px); }
+    60% { clip-path: inset(30% 0 50% 0); transform: translate(5px, -5px); }
+    70% { clip-path: inset(10% 0 10% 0); transform: translate(-10px, 5px); }
+    80% { clip-path: inset(50% 0 50% 0); transform: translate(0px, 0px); }
+    90% { clip-path: inset(20% 0 20% 0); transform: translate(10px, 10px); }
+    100% { clip-path: inset(80% 0 0 0); transform: translate(-10px, -5px); }
+  }
+
+  @keyframes glitch-anim-2 {
+    0% { clip-path: inset(0 0 80% 0); transform: translate(10px, 5px); }
+    10% { clip-path: inset(80% 0 10% 0); transform: translate(-10px, -5px); }
+    20% { clip-path: inset(40% 0 40% 0); transform: translate(10px, -5px); }
+    30% { clip-path: inset(30% 0 50% 0); transform: translate(0px, 10px); }
+    40% { clip-path: inset(70% 0 20% 0); transform: translate(-10px, 5px); }
+    50% { clip-path: inset(10% 0 70% 0); transform: translate(5px, -10px); }
+    60% { clip-path: inset(50% 0 30% 0); transform: translate(-5px, 5px); }
+    70% { clip-path: inset(10% 0 10% 0); transform: translate(10px, -5px); }
+    80% { clip-path: inset(50% 0 50% 0); transform: translate(0px, 0px); }
+    90% { clip-path: inset(20% 0 20% 0); transform: translate(-10px, -10px); }
+    100% { clip-path: inset(0 0 80% 0); transform: translate(10px, 5px); }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(400%); }
+  }
+
+  .animate-scanline {
+    animation: scanline 2s linear infinite;
   }
 </style>
