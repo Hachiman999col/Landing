@@ -1,17 +1,27 @@
 ---
+import ProjectModal from './ProjectModal.astro';
+import appNotesGif from '../assets/gifs/appNotas.gif';
+
 const projects = [
   {
     id: "APP_NOTES",
     title: "appNotes",
-    descEn: "A lightweight mobile application for note-taking. Built with React Native CLI using native Android modules for optimized performance.",
-    descEs: "Una aplicación móvil ligera para toma de notas. Construida con React Native CLI utilizando módulos nativos de Android para un rendimiento optimizado.",
+    descEn:["A lightweight mobile application for note-taking. Built with React Native CLI using native Android modules for optimized performance." , "The project focuses on providing a smooth and efficient experience, leveraging the native capabilities of Android to ensure superior performance."],
+    descEs: ["Una aplicación móvil ligera para toma de notas. Construida con React Native CLI utilizando módulos nativos de Android para un rendimiento optimizado." , 
+    "El reto tecnológico fue integrar módulos nativos de Android para funciones críticas, logrando un rendimiento superior al de las aplicaciones híbridas tradicionales."],
     tech: ["REACT NATIVE", "TYPESCRIPT", "KOTLIN"],
     featuresEn: ["Native Performance", "Local Persistence", "Lightweight Build"],
     featuresEs: ["Rendimiento Nativo", "Persistencia Local", "Construcción Ligera"],
     links: [
       { label: "GITHUB", href: "https://github.com/Hachiman999col/appNotes" },
-      { label: "APK.FILE", href: "https://github.com/Hachiman999col/appNotes/blob/main/notas.apk" }
-    ]
+      { label: "APK.FILE", href: "https://github.com/Hachiman999col/appNotes/releases" }
+    ],
+    details: {
+      languages: ["TYPESCRIPT", "KOTLIN"],
+      internal: ["SQLITE", "JAVA NATIVE INTERFACE", "ANDROID SDK"],
+      animationType: "nativeCLI",
+      gifUrl: appNotesGif.src
+    }
   }
 ];
 ---
@@ -72,8 +82,15 @@ const projects = [
             </div>
             
             <div class="text-zinc-400 text-sm leading-relaxed max-w-2xl mb-8">
-              <p class="lang-en">{project.descEn}</p>
-              <p class="lang-es">{project.descEs}</p>
+        
+              {project.descEn.map((desc, i) => (
+                <p class="lang-en mt-2">{desc}</p>
+              ))}
+    
+              {project.descEs.map((desc, i) => (
+                <p class="lang-es mt-2">{desc}</p>
+              ))}
+    
             </div>
           </div>
 
@@ -87,6 +104,13 @@ const projects = [
                 {link.label}
               </a>
             ))}
+            <button 
+              data-project-id={project.id}
+              class="open-modal-btn px-4 py-2 border border-pink-500/30 bg-pink-500/5 hover:bg-pink-500/10 text-pink-500/70 hover:text-pink-500 text-[10px] font-bold tracking-widest transition-all duration-300 rounded-sm flex items-center gap-2"
+            >
+              <span class="w-1.5 h-1.5 bg-pink-500 animate-pulse rounded-full"></span>
+              INFO_SYSTEM.EXE
+            </button>
           </div>
         </div>
       </div>
@@ -99,9 +123,13 @@ const projects = [
       -- END OF DIRECTORY --
     </div>
   </div>
+
+  <ProjectModal projects={projects} />
 </section>
 
 <style>
+  @reference "../styles/global.css";
+
   .text-glow-magenta {
     text-shadow: 0 0 10px var(--neon-magenta);
   }
