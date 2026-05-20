@@ -1,5 +1,6 @@
 ---
 import ProjectModal from './ProjectModal.astro';
+import ProjectModalOnlyInfo from './ProjectModalOnlyInfo.astro';
 import appNotesGif from '../assets/gifs/appNotas.gif';
 
 const projects = [
@@ -16,11 +17,41 @@ const projects = [
       { label: "GITHUB", href: "https://github.com/Hachiman999col/appNotes" },
       { label: "APK.FILE", href: "https://github.com/Hachiman999col/appNotes/releases" }
     ],
-    details: {
+    details: {      modal:"info",
       languages: ["TYPESCRIPT", "KOTLIN"],
       internal: ["SQLITE", "JAVA NATIVE INTERFACE", "ANDROID SDK"],
       animationType: "nativeCLI",
       gifUrl: appNotesGif.src
+    }
+  },
+    {
+    id: "EXAMPLE_LIB",
+    title: "LIBMOD",
+    descEn:["This is a simple example of creating libraries with reusable component packaging and utilities to streamline projects in React." , 
+    "The technological challenge was to create the lightest possible components that would avoid re-rendering components, thus optimizing application performance. To achieve this, a signal and event controller was implemented, avoiding external libraries."],
+    descEs: ["Es un ejemplo sencillo de la creación de librerias con empaquetación de componentes reutilizables y utlidades para la agilización de proyectos en react" , 
+    "El reto tecnológico fue la creación de componentes lo mas ligeros posibles que evitaran el re-renderizado de componentes, de esta forma se optimiza el rendimiento de la aplicación, para esto se implemento un contralador de señales y eventos evitando librerias externas."],
+    tech: ["REACT", "TYPESCRIPT"],
+    featuresEn: ["Lightweight", "Few dependencies", "Library"],
+    featuresEs: ["Ligero", "Pocas dependencias", "Biblioteca"],
+    links: [
+      { label: "GITHUB", href: "https://github.com/Hachiman999col/libMod" },
+
+    ],
+    details: {
+      modal:"onlyInfo",
+      languages: ["TYPESCRIPT", "REACT"],
+      internal: ["TYPESCRIPT", "JSX", "VITE"],
+      animationType: "nativeCLI",
+
+      list:[
+     "Custom Hooks", 
+      "Custom Components" ,
+      "Events controller" ,
+       "Signal Controller"
+    
+    ]
+      
     }
   }
 ];
@@ -104,13 +135,23 @@ const projects = [
                 {link.label}
               </a>
             ))}
-            <button 
-              data-project-id={project.id}
-              class="open-modal-btn px-4 py-2 border border-pink-500/30 bg-pink-500/5 hover:bg-pink-500/10 text-pink-500/70 hover:text-pink-500 text-[10px] font-bold tracking-widest transition-all duration-300 rounded-sm flex items-center gap-2"
-            >
-              <span class="w-1.5 h-1.5 bg-pink-500 animate-pulse rounded-full"></span>
-              INFO_SYSTEM.EXE
-            </button>
+            {project.details.modal === "onlyInfo" ? (
+              <button 
+                data-project-id={project.id}
+                class="open-info-modal-btn px-4 py-2 border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/10 text-cyan-500/70 hover:text-cyan-500 text-[10px] font-bold tracking-widest transition-all duration-300 rounded-sm flex items-center gap-2"
+              >
+                <span class="w-1.5 h-1.5 bg-cyan-500 animate-pulse rounded-full"></span>
+                CORE_FLOW.SH
+              </button>
+            ) : (
+              <button 
+                data-project-id={project.id}
+                class="open-modal-btn px-4 py-2 border border-pink-500/30 bg-pink-500/5 hover:bg-pink-500/10 text-pink-500/70 hover:text-pink-500 text-[10px] font-bold tracking-widest transition-all duration-300 rounded-sm flex items-center gap-2"
+              >
+                <span class="w-1.5 h-1.5 bg-pink-500 animate-pulse rounded-full"></span>
+                INFO_SYSTEM.EXE
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -125,6 +166,7 @@ const projects = [
   </div>
 
   <ProjectModal projects={projects} />
+  <ProjectModalOnlyInfo projects={projects} />
 </section>
 
 <style>

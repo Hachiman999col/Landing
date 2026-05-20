@@ -1,0 +1,93 @@
+---
+---
+<div class="w-full h-full flex items-center justify-center">
+  <div class="w-full max-w-[400px] aspect-[2/1] relative">
+    <!-- React Side -->
+    <div class="node react-node top-1/2 left-[10%] -translate-y-1/2 z-10">
+      <span class="opacity-50 text-[8px] absolute -top-4 left-0 uppercase">Frontend</span>
+      REACT
+    </div>
+    
+    <!-- Libmod (Center) -->
+    <div class="node libmod-node top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-pink-500/20 shadow-lg">
+      <span class="opacity-50 text-[8px] absolute -bottom-6 left-1/2 -translate-x-1/2 uppercase whitespace-nowrap">Core_Bridge</span>
+      LIBMOD
+    </div>
+    
+    <!-- Backend Side -->
+    <div class="node back-node top-1/2 right-[10%] -translate-y-1/2 z-10">
+      <span class="opacity-50 text-[8px] absolute -top-4 right-0 uppercase">Backend</span>
+      BACK
+    </div>
+    
+    <!-- Paths and Animations -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 100 50">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Logical Paths (Relative to 100x50 viewBox) -->
+      <!-- React(18,25) to libmod(50,25) -->
+      <path id="react-to-libmod" d="M 18 25 L 50 25" class="path stroke-cyan-500/10" />
+      <path id="libmod-to-react" d="M 50 25 L 18 25" class="path stroke-pink-500/10" />
+      
+      <!-- libmod(50,25) to Back(82,25) -->
+      <path id="libmod-to-back" d="M 50 25 L 82 25" class="path stroke-pink-500/10" />
+      <path id="back-to-libmod" d="M 82 25 L 50 25" class="path stroke-emerald-500/10" />
+
+      <!-- Particles -->
+      <!-- React -> libmod (Request) -->
+      <circle r="1" fill="#22d3ee" filter="url(#glow)">
+        <animateMotion dur="2s" repeatCount="indefinite">
+          <mpath href="#react-to-libmod"/>
+        </animateMotion>
+      </circle>
+
+      <!-- libmod -> React (Response) -->
+      <circle r="1" fill="#ec4899" filter="url(#glow)">
+        <animateMotion dur="2s" repeatCount="indefinite" begin="1s">
+          <mpath href="#libmod-to-react"/>
+        </animateMotion>
+      </circle>
+
+      <!-- libmod -> Back (Internal Call) -->
+      <circle r="1" fill="#ec4899" filter="url(#glow)">
+        <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.2s">
+          <mpath href="#libmod-to-back"/>
+        </animateMotion>
+      </circle>
+
+      <!-- Back -> libmod (Data) -->
+      <circle r="1" fill="#10b981" filter="url(#glow)">
+        <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.1s">
+          <mpath href="#back-to-libmod"/>
+        </animateMotion>
+      </circle>
+    </svg>
+  </div>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .node {
+    @apply absolute w-16 h-12 border border-zinc-800 bg-zinc-950 flex items-center justify-center text-[10px] font-bold text-zinc-500 tracking-tighter rounded-sm;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .react-node { @apply border-cyan-500/30 text-cyan-500/70; }
+  .libmod-node { @apply border-pink-500/30 text-pink-500/70; }
+  .back-node { @apply border-emerald-500/30 text-emerald-500/70; }
+
+  .path {
+    fill: none;
+    stroke-width: 0.5;
+    stroke-dasharray: 2;
+  }
+</style>

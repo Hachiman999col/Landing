@@ -24,8 +24,8 @@ interface Props {
 const { techDetails } = Astro.props;
 ---
 
-<dialog id="tech-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm p-4 w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center">
-  <div class="omarchy-window bg-zinc-950/95 border-cyan-500/30 overflow-hidden flex flex-col w-full max-w-5xl max-h-[90vh] shadow-2xl shadow-cyan-500/10 relative">
+<dialog id="tech-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center">
+  <div class="omarchy-window bg-zinc-950/95 border-cyan-500/30 overflow-hidden flex flex-col w-full max-w-5xl h-[70vh] shadow-2xl shadow-cyan-500/10 relative">
      <!-- Modal Header -->
      <div class="flex justify-between items-center p-4 border-b border-zinc-900 bg-black/40 flex-shrink-0">
         <div class="flex items-center gap-3">
@@ -38,10 +38,10 @@ const { techDetails } = Astro.props;
      </div>
      
       <!-- Modal Body -->
-      <div class="flex-1 overflow-hidden">
-         <div class="grid grid-cols-1 lg:grid-cols-12 h-full">
+      <div class="flex-1 overflow-hidden min-h-0">
+          <div class="grid grid-cols-1 lg:grid-cols-12 h-full overflow-hidden min-h-0">
             <!-- Left: Info + Logo -->
-            <div class="lg:col-span-5 p-8 space-y-10 border-r border-zinc-900/50 overflow-y-auto custom-scrollbar">
+            <div class="lg:col-span-5 p-8 space-y-10 border-r border-zinc-900/50 overflow-y-auto custom-scrollbar min-h-0">
                <section>
                   <h4 class="text-[10px] text-zinc-500 font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
                      <span class="w-8 h-[1px] bg-zinc-800"></span>
@@ -82,7 +82,7 @@ const { techDetails } = Astro.props;
             </div>
             
             <!-- Right: Projects -->
-            <div class="lg:col-span-7 p-8 overflow-y-auto custom-scrollbar bg-black/10">
+            <div class="lg:col-span-7 p-8 overflow-y-auto custom-scrollbar bg-black/10 min-h-0">
                <div class="space-y-12">
                   <!-- Professional Projects -->
                   <section class="space-y-6">
@@ -229,6 +229,13 @@ const { techDetails } = Astro.props;
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(4px);
+  }
+
+  dialog {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    max-height: none;
   }
 
   .bg-grid {
