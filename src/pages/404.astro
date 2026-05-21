@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <section class="flex items-center justify-center min-h-[80vh] px-8">
+    <div class="text-center space-y-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 border border-red-500/20 bg-red-500/5 text-red-500 text-[10px] tracking-[0.2em] uppercase">
+        <div class="w-1 h-1 bg-red-500 rounded-full animate-pulse"></div>
+        <span>ERROR_404 // NOT_FOUND</span>
+      </div>
+      
+      <div class="space-y-2">
+        <h1 class="text-7xl md:text-9xl font-bold tracking-tighter text-white text-glow-cyan">
+          404
+        </h1>
+        <div class="h-1 w-20 bg-gradient-to-r from-red-500 to-transparent mx-auto"></div>
+      </div>
+      
+      <div class="text-base md:text-lg text-zinc-400 max-w-xl leading-relaxed font-medium mx-auto">
+        <p class="lang-en">
+          The requested resource could not be located. The path may have been moved or deleted.
+        </p>
+        <p class="lang-es">
+          El recurso solicitado no pudo ser localizado. La ruta puede haber sido movida o eliminada.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-4 pt-4 justify-center">
+        <a 
+          href="/"
+          class="h-10 px-8 border border-cyan-400/50 bg-cyan-400/5 text-cyan-400 text-xs font-bold tracking-widest hover:bg-cyan-400 hover:text-white transition-all duration-300 rounded-sm no-underline flex items-center"
+        >
+          <span class="lang-en">RETURN_HOME.EXE</span>
+          <span class="lang-es">VOLVER_INICIO.EXE</span>
+        </a>
+      </div>
+
+      <div class="pt-8 text-[9px] text-zinc-700 font-mono">
+        <div>SYS_DIAGNOSTIC: PATH_NOT_IN_REGISTRY</div>
+        <div class="mt-1">SUGGESTION: NAVIGATE TO / FOR MAIN DIRECTORY</div>
+      </div>
+    </div>
+  </section>
+</Layout>

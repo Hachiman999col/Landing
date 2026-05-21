@@ -17,7 +17,7 @@ const projects = [
       { label: "GITHUB", href: "https://github.com/Hachiman999col/appNotes" },
       { label: "APK.FILE", href: "https://github.com/Hachiman999col/appNotes/releases" }
     ],
-    details: {      modal:"info",
+    details: {      modal:"info" as const,
       languages: ["TYPESCRIPT", "KOTLIN"],
       internal: ["SQLITE", "JAVA NATIVE INTERFACE", "ANDROID SDK"],
       animationType: "nativeCLI",
@@ -39,7 +39,7 @@ const projects = [
 
     ],
     details: {
-      modal:"onlyInfo",
+      modal:"onlyInfo" as const,
       languages: ["TYPESCRIPT", "REACT"],
       internal: ["TYPESCRIPT", "JSX", "VITE"],
       animationType: "nativeCLI",
@@ -114,11 +114,11 @@ const projects = [
             
             <div class="text-zinc-400 text-sm leading-relaxed max-w-2xl mb-8">
         
-              {project.descEn.map((desc, i) => (
+              {project.descEn.map((desc) => (
                 <p class="lang-en mt-2">{desc}</p>
               ))}
     
-              {project.descEs.map((desc, i) => (
+              {project.descEs.map((desc) => (
                 <p class="lang-es mt-2">{desc}</p>
               ))}
     
@@ -168,11 +168,3 @@ const projects = [
   <ProjectModal projects={projects} />
   <ProjectModalOnlyInfo projects={projects} />
 </section>
-
-<style>
-  @reference "../styles/global.css";
-
-  .text-glow-magenta {
-    text-shadow: 0 0 10px var(--neon-magenta);
-  }
-</style>

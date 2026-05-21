@@ -1,46 +1,66 @@
-# Astro Starter Kit: Basics
+# Diego | Software Engineer Portfolio
 
-```sh
-npm create astro@latest -- --template basics
+Personal portfolio website built with Astro, React, and Tailwind CSS v4. Features a cyberpunk/terminal-inspired design with bilingual support (English/Spanish).
+
+## Tech Stack
+
+- **Astro** - Static site generator
+- **React** - UI components
+- **Tailwind CSS v4** - Styling
+- **TypeScript** - Type safety
+
+## Project Structure
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│   ├── favicon.svg
+│   ├── favicon.ico
+│   ├── cv-eng.pdf
+│   └── hv.pdf
+├── src/
+│   ├── assets/
+│   │   ├── logos/
+│   │   └── gifs/
+│   ├── components/
+│   │   ├── Hero.astro
+│   │   ├── Sidebar.astro
+│   │   ├── TechStack.astro
+│   │   ├── TechModal.astro
+│   │   ├── Projects.astro
+│   │   ├── ProjectModal.astro
+│   │   ├── ProjectModalOnlyInfo.astro
+│   │   ├── NativeBridgeAnimation.astro
+│   │   ├── LibmodAnimation.astro
+│   │   └── LanguageToggle.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   └── index.astro
+│   ├── styles/
+│   │   └── global.css
+│   └── types.ts
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Commands
 
-## 🧞 Commands
+| Command           | Action                                           |
+| :---------------- | :----------------------------------------------- |
+| `npm install`     | Installs dependencies                            |
+| `npm run dev`     | Starts local dev server at `localhost:4321`      |
+| `npm run build`   | Build your production site to `./dist/`          |
+| `npm run preview` | Preview your build locally, before deploying     |
 
-All commands are run from the root of the project, from a terminal:
+## Features
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- **Bilingual**: English/Spanish language toggle with localStorage persistence
+- **Responsive**: Mobile-first design with desktop sidebar navigation
+- **Interactive Modals**: Technology details, project showcases with animations
+- **SVG Animations**: Data flow visualizations for project architectures
+- **Glitch Effects**: Hover-triggered glitch animations on tech logos
+- **Terminal Aesthetic**: Omarchy-style window frames, monospace typography, grid backgrounds
 
-## 👀 Want to learn more?
+## Deployment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Configured for GitHub Pages deployment. Update `site` and `base` in `astro.config.mjs` as needed.

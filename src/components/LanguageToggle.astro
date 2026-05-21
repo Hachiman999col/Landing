@@ -1,11 +1,13 @@
 ---
 ---
 
-<div class=" z-50 flex gap-1 bg-black/40 p-1 rounded-sm border border-zinc-800/50">
+<div class=" z-50 flex gap-1 bg-black/40 p-1 rounded-sm border border-zinc-800/50" role="group" aria-label="Language selector">
   <button 
     id="btn-en" 
     class="w-7 h-7 flex items-center justify-center bg-transparent hover:bg-cyan-400/10 transition-all duration-200 rounded-xs grayscale hover:grayscale-0"
     title="English"
+    aria-pressed="false"
+    aria-label="Switch to English"
   >
     <img src="https://flagcdn.com/us.svg" alt="USA Flag" class="w-4 h-auto opacity-50 hover:opacity-100 transition-opacity" />
   </button>
@@ -14,6 +16,8 @@
     id="btn-es" 
     class="w-7 h-7 flex items-center justify-center bg-transparent hover:bg-pink-500/10 transition-all duration-200 rounded-xs grayscale hover:grayscale-0"
     title="Español"
+    aria-pressed="false"
+    aria-label="Cambiar a Español"
   >
     <img src="https://flagcdn.com/co.svg" alt="Colombia Flag" class="w-4 h-auto opacity-50 hover:opacity-100 transition-opacity" />
   </button>
@@ -28,17 +32,20 @@
     html.setAttribute('lang', lang);
     localStorage.setItem('preferred-lang', lang);
     
-    // Update active state
     if (lang === 'en') {
       btnEn?.classList.remove('grayscale');
       btnEn?.classList.add('border-cyan-500');
+      btnEn?.setAttribute('aria-pressed', 'true');
       btnEs?.classList.add('grayscale');
       btnEs?.classList.remove('border-magenta-500');
+      btnEs?.setAttribute('aria-pressed', 'false');
     } else {
       btnEs?.classList.remove('grayscale');
       btnEs?.classList.add('border-magenta-500');
+      btnEs?.setAttribute('aria-pressed', 'true');
       btnEn?.classList.add('grayscale');
       btnEn?.classList.remove('border-cyan-500');
+      btnEn?.setAttribute('aria-pressed', 'false');
     }
   };
 

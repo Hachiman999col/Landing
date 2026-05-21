@@ -1,14 +1,15 @@
 ---
 import NativeBridgeAnimation from './NativeBridgeAnimation.astro';
+import type { Project } from '../types';
 
 interface Props {
-  projects: any[];
+  projects: Project[];
 }
 
 const { projects } = Astro.props;
 ---
 
-<dialog id="project-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm p-4 w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center">
+<dialog id="project-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm p-4 w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Project information">
   <div class="omarchy-window bg-zinc-950/95 border-pink-500/30 overflow-hidden flex flex-col w-full max-w-4xl max-h-[90vh] shadow-2xl shadow-pink-500/10 relative">
      <!-- Modal Header -->
      <div class="flex justify-between items-center p-4 border-b border-zinc-900 bg-black/40">
@@ -93,7 +94,6 @@ const { projects } = Astro.props;
           const langEl = modal.querySelector('.pm-languages');
           const techEl = modal.querySelector('.pm-technologies');
           const animNative = modal.querySelector('.pm-anim-nativeCLI');
-          const previewSection = modal.querySelector('.pm-preview-section');
           const previewGif = modal.querySelector('.pm-preview-gif');
 
           if (titleEl) titleEl.textContent = project.title;

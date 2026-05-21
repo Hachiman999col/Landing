@@ -24,7 +24,7 @@ interface Props {
 const { techDetails } = Astro.props;
 ---
 
-<dialog id="tech-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center">
+<dialog id="tech-modal" class="bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-sm w-full h-full border-none outline-none fixed inset-0 z-[100] open:flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Technology details">
   <div class="omarchy-window bg-zinc-950/95 border-cyan-500/30 overflow-hidden flex flex-col w-full max-w-5xl h-[90vh] md:h-[700px] shadow-2xl shadow-cyan-500/10 relative">
      <!-- Modal Header -->
      <div class="flex justify-between items-center p-4 border-b border-zinc-900 bg-black/40 flex-shrink-0">
